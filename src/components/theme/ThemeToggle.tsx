@@ -1,0 +1,44 @@
+"use client";
+
+import { toggleTheme, useTheme } from "./theme-store";
+
+const ThemeIcon = () => (
+  <svg
+    aria-hidden="true"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinejoin="round"
+  >
+    <circle cx="12" cy="12" r="8" />
+    <path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" />
+  </svg>
+);
+
+/**
+ * The store's only theme control and the only `useTheme` subscriber, so it
+ * is also what keeps the page following the OS theme until the visitor
+ * picks one.
+ */
+export function ThemeToggle() {
+  const theme = useTheme();
+  return (
+    <button
+      type="button"
+      aria-label={
+        theme === "dark"
+          ? "Switch to light theme"
+          : theme === "light"
+            ? "Switch to dark theme"
+            : "Switch color theme"
+      }
+      onClick={() => toggleTheme()}
+      className="press grid size-11 place-items-center rounded-pill text-fg"
+    >
+      <ThemeIcon />
+    </button>
+  );
+}
